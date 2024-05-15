@@ -46,7 +46,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
                     ${isLoginMode ? "Зарегистрироваться." : "Войти."}
                   </button>
                 </p> 
-               
+              
               </div>
           </div>
       </div>    
