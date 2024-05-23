@@ -1,6 +1,7 @@
 
 import { renderHeaderComponent } from "./header-component.js"
-import { posts, goToPage } from "../index.js"
+import { posts } from "../index.js"
+import { renderLikeButtonComponent } from "./like-button-component.js"
 
 export function renderUserPostsPageComponent({ appEl }) {
   /**
@@ -11,44 +12,34 @@ export function renderUserPostsPageComponent({ appEl }) {
     <div class="page-container">
       <div class="header-container"></div>
 
+      ${posts.filter((post, index) => index === 0).map((post) =>
+        `<div class="post-header" data-user-id="${post.user.id}">
+          <img class="post-header__user-image" src="${post.user.imageUrl}">
+          <p class="post-header__user-name">${post.user.name.sanitize()}: Все публикации пользователя</p>
+        </div>`
+      ).join("")}
+
       <ul class="posts">
       ${posts.map((post) => {
-        return `
+    return `
           <li class="post" data-post-id="${post.id}">
-            <div class="post-header" data-user-id="${post.user.id}">
-                <img class="post-header__user-image" src="${post.user.imageUrl}">
-                <p class="post-header__user-name">${post.user.name}</p>
-            </div>
-
+          
             <div class="post-image-container" data-post-id="${post.id}">
               <img class="post-image" src="${post.imageUrl}">
             </div>
 
-            <div class="post-likes">
-              <button class="like-button"  data-post-id="${post.isLiked}">
-
-              ${
-                post.isLiked
-                  ? `<img src="./assets/images/like-active.svg">`
-                  : `<img src="./assets/images/like-not-active.svg">`
-              }
-
-              </button>
-              <p class="post-likes-text">
-                Нравится: <strong>${post.likes}</strong>
-              </p>
-            </div>
+            <div class="post-likes" data-post-id="${post.id}"></div>
 
             <p class="post-text">
-              <span class="user-name">${post.user.name}</span>
-              ${post.description}
+              <span class="user-name">${post.user.name.sanitize()}</span>
+              ${post.description.sanitize()}
             </p>
 
             <p class="post-date">
               ${new Date(post.createdAt)}
             </p>
           </li>`
-        }).join("")}
+  }).join("")}
       </ul>
     </div>`
 
@@ -56,5 +47,12 @@ export function renderUserPostsPageComponent({ appEl }) {
 
   renderHeaderComponent({
     element: document.querySelector(".header-container"),
+  })
+
+  document.querySelectorAll(".post-likes").forEach((element) => {
+    const filteredPosts = posts.filter((post) => post.id === element.dataset.postId)
+
+    if (filteredPosts.length)
+      renderLikeButtonComponent(element, filteredPosts[0])
   })
 }

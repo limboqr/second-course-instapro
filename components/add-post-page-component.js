@@ -1,9 +1,9 @@
 
-import { renderHeaderComponent } from "./header-component.js";
-import { renderUploadImageComponent } from "./upload-image-component.js";
+import { renderHeaderComponent } from "./header-component.js"
+import { renderUploadImageComponent } from "./upload-image-component.js"
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
-  let imageUrl = "";
+  let imageUrl = ""
 
   const render = () => {
     // TODO: Реализовать страницу добавления поста
@@ -28,28 +28,28 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     </div>
   `
 
-    appEl.innerHTML = appHtml;
+    appEl.innerHTML = appHtml
 
     renderHeaderComponent({
       element: document.querySelector(".header-container"),
-    });
+    })
 
-    const uploadImageContainer = appEl.querySelector(".upload-image-container");
+    const uploadImageContainer = appEl.querySelector(".upload-image-container")
 
     if (uploadImageContainer) {
       renderUploadImageComponent({
         element: appEl.querySelector(".upload-image-container"),
         onImageUrlChange(newImageUrl) {
-          imageUrl = newImageUrl;
+          imageUrl = newImageUrl
         },
-      });
+      })
     }
 
     const inputDescription = document.getElementById("description")
 
     document.getElementById("add-button").addEventListener("click", () => {
       onAddPostClick({
-        description: inputDescription.value,
+        description: `: ${inputDescription.value}`,
         imageUrl: imageUrl,
       })
     })

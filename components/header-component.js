@@ -1,5 +1,5 @@
-import { goToPage, logout, user } from "../index.js";
-import { ADD_POSTS_PAGE, AUTH_PAGE, POSTS_PAGE } from "../routes.js";
+import { goToPage, logout, user } from "../index.js"
+import { ADD_POSTS_PAGE, AUTH_PAGE, POSTS_PAGE } from "../routes.js"
 
 export function renderHeaderComponent({ element }) {
   element.innerHTML = `
@@ -19,23 +19,23 @@ export function renderHeaderComponent({ element }) {
       }  
   </div>
   
-`;
+`
 
   element
     .querySelector(".add-or-login-button")
     .addEventListener("click", () => {
       if (user) {
-        goToPage(ADD_POSTS_PAGE);
+        goToPage(ADD_POSTS_PAGE)
       } else {
-        goToPage(AUTH_PAGE);
+        goToPage(AUTH_PAGE)
       }
-    });
+    })
 
   element.querySelector(".logo").addEventListener("click", () => {
-    goToPage(POSTS_PAGE);
-  });
+    goToPage(POSTS_PAGE)
+  })
 
-  element.querySelector(".logout-button")?.addEventListener("click", logout);
+  element.querySelector(".logout-button")?.addEventListener("click", logout)
 
-  return element;
+  return element
 }
