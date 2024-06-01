@@ -61,10 +61,10 @@ export const goToPage = (newPage, data) => {
           posts = newPosts
           renderApp()
         })
-        // .catch((error) => {
-        //   console.error(error)
-        //   goToPage(POSTS_PAGE)
-        // })
+        .catch((error) => {
+          console.error(error)
+          goToPage(POSTS_PAGE)
+        })
     }
 
     if (newPage === USER_POSTS_PAGE) {
@@ -77,10 +77,10 @@ export const goToPage = (newPage, data) => {
           posts = newPosts
           renderApp()
         })
-        // .catch((error) => {
-        //   console.error(error)
-        //   goToPage(USER_POSTS_PAGE)
-        // })
+        .catch((error) => {
+          console.error(error)
+          goToPage(USER_POSTS_PAGE)
+        })
     }
 
     page = newPage

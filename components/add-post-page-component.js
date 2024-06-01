@@ -49,7 +49,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
 
     document.getElementById("add-button").addEventListener("click", () => {
       onAddPostClick({
-        description: `: ${inputDescription.value}`,
+        description: `: ${inputDescription.value.sanitize()}`,
         imageUrl: imageUrl,
       })
     })
